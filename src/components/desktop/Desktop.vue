@@ -86,7 +86,7 @@ function closeStartMenu() {
 .win11-desktop {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: url('/bg.jpg') center/cover no-repeat fixed;
   position: relative;
   overflow: hidden;
 }

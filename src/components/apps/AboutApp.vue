@@ -1,7 +1,7 @@
 <template>
   <div class="about-app">
     <div class="about-header">
-      <div class="avatar">👨‍💻</div>
+      <img class="avatar" src="/avatar.jpg" alt="头像" />
       <h1 class="name">博客作者</h1>
       <p class="bio">一个热爱技术的开发者</p>
     </div>
@@ -45,7 +45,10 @@
 }
 
 .avatar {
-  font-size: 64px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
   margin-bottom: 16px;
 }
 
