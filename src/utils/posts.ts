@@ -16,14 +16,19 @@ function parseFrontMatter(content: string): { meta: Record<string, string>, body
     }
 
     const meta: Record<string, string> = {}
-    match[1].split('\n').forEach(line => {
-        const [key, ...rest] = line.split(':')
-        if (key && rest.length) {
-            meta[key.trim()] = rest.join(':').trim()
-        }
-    })
+    const frontMatter = match[1]
+    const body = match[2]
+    
+    if (frontMatter) {
+        frontMatter.split('\n').forEach(line => {
+            const [key, ...rest] = line.split(':')
+            if (key && rest.length) {
+                meta[key.trim()] = rest.join(':').trim()
+            }
+        })
+    }
 
-    return { meta, body: match[2] }
+    return { meta, body: body || '' }
 }
 
 //获取所有文章列表
@@ -32,15 +37,19 @@ export async function getPosts(): Promise<PostMeta[]> {
     const posts: PostMeta[] = []
 
     for (const path in modules) {
-        const slug = path.split('/').pop()?.replace('.md', '') || ''
-        const content = await modules[path]() as string
-        const { meta } = parseFrontMatter(content)
-        posts.push({
-            slug,
-            title: meta.title || slug,
-            date: meta.date || '',
-            summary: meta.summary || ''
-        })
+        const fileName = path.split('/').pop()
+        const slug = fileName ? fileName.replace('.md', '') : ''
+        const loader = modules[path]
+        if (loader) {
+            const content = await loader() as string
+            const { meta } = parseFrontMatter(content)
+            posts.push({
+                slug,
+                title: meta.title || slug,
+                date: meta.date || '',
+                summary: meta.summary || ''
+            })
+        }
     }
 
     //按日期倒序排列
@@ -52,11 +61,12 @@ export async function getPost(slug: string): Promise<{ meta: PostMeta, html: str
     const modules = import.meta.glob('/src/posts/*.md', { query: '?raw', import: 'default' })
     const path = `/src/posts/${slug}.md`
 
-    if (!modules[path]) {
+    const loader = modules[path]
+    if (!loader) {
         return null
     }
 
-    const content = await modules[path]() as string
+    const content = await loader() as string
     const { meta, body } = parseFrontMatter(content)
     const html = await marked(body)
 
