@@ -1,31 +1,55 @@
 # Project Context
 
-## Purpose
-[Describe your project's purpose and goals]
+## 项目名称
+个人博客
 
-## Tech Stack
-- [List your primary technologies]
-- [e.g., TypeScript, React, Node.js]
+## 项目目的
+学习 Vue3 的同时创建个人博客，最终部署到 GitHub Pages。
 
-## Project Conventions
+## AI 协作模式
+**指导者模式**：AI 不直接编写代码，仅提供：
+- 技术方案指导
+- 代码审查建议
+- 问题解答与思路引导
+- 规范文档编写
 
-### Code Style
-[Describe your code style preferences, formatting rules, and naming conventions]
+用户需自行编写代码，以达到学习目的。
 
-### Architecture Patterns
-[Document your architectural decisions and patterns]
+## 技术栈
+- Vue 3（Composition API）
+- Vite（构建工具）
+- TypeScript
+- Vue Router（路由）
+- Pinia（状态管理）
+- UI 框架（待定）
+- GitHub Pages（部署平台）
 
-### Testing Strategy
-[Explain your testing approach and requirements]
+## 项目规范
 
-### Git Workflow
-[Describe your branching strategy and commit conventions]
+### 代码风格
+- 注释符号后不跟空格（如：`//注释` 而非 `// 注释`）
+- 所有注释、错误信息使用中文
+- 使用模块化编程，组件拆分合理
 
-## Domain Context
-[Add domain-specific knowledge that AI assistants need to understand]
+### 架构模式
+- 组件化开发
+- 单文件组件（SFC）
+- Composition API 优先
 
-## Important Constraints
-[List any technical, business, or regulatory constraints]
+### 测试策略
+[待定义]
 
-## External Dependencies
-[Document key external services, APIs, or systems]
+### Git 工作流
+- 禁止在 git commit 中添加 Co-authored-by
+- 提交信息使用中文
+
+## 领域知识
+个人博客系统，用于展示文章、项目作品等个人内容。
+
+## 重要约束
+- 静态部署到 GitHub Pages
+- 学习为主，代码需清晰易懂
+- AI 仅指导，不代写代码
+
+## 外部依赖
+- GitHub Pages（托管服务）
