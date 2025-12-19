@@ -167,7 +167,7 @@ function selectPost(post: Post) {
 .content-body :deep(h2) {
   font-size: 18px;
   margin: 20px 0 12px;
-  color: #60cdff;
+  color: #a78bfa;
 }
 
 .content-body :deep(ul) {

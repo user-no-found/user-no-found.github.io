@@ -1,6 +1,6 @@
 <template>
   <Transition name="start-menu">
-    <div v-if="isOpen" class="win11-start-menu">
+    <div v-if="isOpen" class="modern-start-menu">
       <div class="start-header">
         <input type="text" class="search-box" placeholder="搜索应用、设置、文档">
       </div>
@@ -61,7 +61,7 @@ function openApp(app: typeof apps[0]) {
 </script>
 
 <style scoped>
-.win11-start-menu {
+.modern-start-menu {
   position: fixed;
   bottom: 60px;
   left: 50%;

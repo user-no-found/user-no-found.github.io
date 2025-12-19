@@ -1,5 +1,5 @@
 <template>
-  <div class="win11-window" 
+  <div class="modern-window" 
        :class="{ maximized: windowState.isMaximized, active: isActive }"
        :style="windowStyle"
        @mousedown="handleFocus">
@@ -102,7 +102,7 @@ function handleClose() {
 </script>
 
 <style scoped>
-.win11-window {
+.modern-window {
   position: absolute;
   background: rgba(32, 32, 32, 0.85);
   backdrop-filter: blur(20px);
@@ -117,7 +117,7 @@ function handleClose() {
 }
 
 
-.win11-window.maximized {
+.modern-window.maximized {
   left: 0 !important;
   top: 0 !important;
   width: 100% !important;
@@ -125,7 +125,7 @@ function handleClose() {
   border-radius: 0;
 }
 
-.win11-window.active {
+.modern-window.active {
   border-color: rgba(255, 255, 255, 0.15);
 }
 

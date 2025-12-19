@@ -1,8 +1,8 @@
 <template>
-  <div class="win11-taskbar">
+  <div class="modern-taskbar">
     <div class="taskbar-left">
       <button class="taskbar-btn start-btn" @click="$emit('toggleStart')">
-        <span class="start-icon">⊞</span>
+        <span class="start-icon">◈</span>
       </button>
     </div>
     <div class="taskbar-center">
@@ -58,7 +58,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.win11-taskbar {
+.modern-taskbar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -111,7 +111,7 @@ onUnmounted(() => {
   bottom: 4px;
   width: 20px;
   height: 3px;
-  background: #60cdff;
+  background: #7c3aed;
   border-radius: 2px;
 }
 

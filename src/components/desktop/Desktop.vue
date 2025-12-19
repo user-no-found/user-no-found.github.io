@@ -1,5 +1,5 @@
 <template>
-  <div class="win11-desktop" @click="closeStartMenu">
+  <div class="modern-desktop" @click="closeStartMenu">
     <!-- 桌面图标 -->
     <div class="desktop-icons">
       <button 
@@ -83,7 +83,7 @@ function closeStartMenu() {
 </script>
 
 <style scoped>
-.win11-desktop {
+.modern-desktop {
   width: 100vw;
   height: 100vh;
   background: url('/bg.jpg') center/cover no-repeat fixed;

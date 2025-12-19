@@ -75,7 +75,7 @@
 
 .info-section h2 {
   font-size: 16px;
-  color: #60cdff;
+  color: #a78bfa;
   margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -96,8 +96,8 @@
 
 .tag {
   padding: 4px 12px;
-  background: rgba(96, 205, 255, 0.2);
-  color: #60cdff;
+  background: rgba(167, 139, 250, 0.2);
+  color: #a78bfa;
   border-radius: 4px;
   font-size: 12px;
 }
