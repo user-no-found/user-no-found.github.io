@@ -14,17 +14,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { getPosts, type PostMeta } from '../utils/posts'
 
-//临时硬编码数据，阶段4会改为动态获取
-const posts = ref([
-    {
-        slug: 'hello-world',
-        title: '我的第一篇文章',
-        date: '2025-12-19',
-        summary: '这是我的个人博客的第一篇文章，记录我学习 Vue3 的旅程。'
-    }
-])
+const posts = ref<PostMeta[]>([])
+
+onMounted(async () => {
+    posts.value = await getPosts()
+})
 </script>
 
 <style scoped>

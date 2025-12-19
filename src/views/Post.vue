@@ -1,38 +1,26 @@
 <template>
     <div class="post">
         <router-link to="/" class="back">← 返回首页</router-link>
-        <article v-html="content"></article>
+        <article v-if="post">
+            <h1>{{ post.meta.title }}</h1>
+            <p class="date">{{ post.meta.date }}</p>
+            <div v-html="post.html"></div>
+        </article>
+        <p v-else>文章不存在</p>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-//import { useRoute } from 'vue-router'
-import { marked } from 'marked'
+import { useRoute } from 'vue-router'
+import { getPost, type PostMeta } from '../utils/posts'
 
-//const route = useRoute()
-const content = ref('')
+const route = useRoute()
+const post = ref<{ meta: PostMeta, html: string } | null>(null)
 
 onMounted(async () => {
-    //const slug = route.params.slug as string
-
-    //临时硬编码，阶段4会改为动态加载md文件
-    const markdown = `
-  # 我的第一篇文章
-
-  欢迎来到我的博客！
-
-  这是使用 Vue3 + TypeScript 搭建的个人博客。
-
-  ## 为什么写博客？
-
-  - 记录学习过程
-  - 分享技术心得
-  - 积累个人作品
-
-  感谢阅读！`
-
-    content.value = await marked(markdown)
+    const slug = route.params.slug as string
+    post.value = await getPost(slug)
 })
 </script>
 
@@ -52,6 +40,12 @@ onMounted(async () => {
 
 .back:hover {
     text-decoration: underline;
+}
+
+.date {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
 article {
