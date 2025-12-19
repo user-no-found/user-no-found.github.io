@@ -14,7 +14,7 @@ const route = useRoute()
 const content = ref('')
 
 onMounted(async () => {
-    const slug = route.params.slug as string
+    //const slug = route.params.slug as string
 
     //临时硬编码，阶段4会改为动态加载md文件
     const markdown = `
