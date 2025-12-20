@@ -45,4 +45,5 @@ const emit = defineEmits<{
     text-align: center;
     margin-top: 5px;
 }
+
 </style>

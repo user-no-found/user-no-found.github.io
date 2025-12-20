@@ -257,4 +257,5 @@ onMounted(async () => {
 .link-icon {
     font-size: 18px;
 }
+
 </style>

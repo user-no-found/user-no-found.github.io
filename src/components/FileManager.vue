@@ -51,4 +51,5 @@ const emit = defineEmits<{
     margin-top: 5px;
     word-break: break-word;
 }
+
 </style>

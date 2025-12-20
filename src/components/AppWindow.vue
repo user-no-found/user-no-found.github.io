@@ -177,4 +177,5 @@ const stopResize = () => {
     cursor: nwse-resize;
     background: linear-gradient(135deg, transparent 50%, #999 50%);
 }
+
 </style>

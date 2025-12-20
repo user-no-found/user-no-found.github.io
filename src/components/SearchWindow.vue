@@ -110,4 +110,5 @@ const filteredPosts = computed(() => {
     text-align: center;
     padding: 20px;
 }
+
 </style>
