@@ -469,4 +469,100 @@ const stopDrag = () => {
 
 ---
 
+## 组件事件传递链
+
+### 多层组件通信
+
+当需要从孙组件传递事件到祖组件时，需要逐层传递：
+
+```
+StartMenu (孙) --emit--> DockBar (子) --emit--> Desktop (父)
+```
+
+**每一层都需要：**
+1. 子组件用 `emit` 触发事件
+2. 父组件用 `@事件名` 监听
+3. 父组件再 `emit` 给更上层
+
+```typescript
+//StartMenu.vue - 触发事件
+emit('openProfile', url)
+
+//DockBar.vue - 监听并转发
+<StartMenu @open-profile="handleOpenProfile" />
+const handleOpenProfile = (url: string) => {
+  emit('openProfile', url)
+}
+
+//Desktop.vue - 最终处理
+<DockBar @open-profile="openProfileWindow" />
+```
+
+---
+
+## iframe 嵌入限制
+
+### X-Frame-Options
+
+很多网站（如 GitHub）设置了 `X-Frame-Options` 响应头，禁止被 iframe 嵌入：
+
+```
+X-Frame-Options: DENY          // 完全禁止
+X-Frame-Options: SAMEORIGIN    // 只允许同源
+```
+
+**解决方案：**
+- 改用卡片形式展示信息 + 链接按钮跳转
+- 使用 `window.open()` 在新标签页打开
+
+---
+
+## 防止拖拽时选中文本
+
+拖拽或缩放窗口时，鼠标移动可能选中页面文本。解决方法：
+
+```typescript
+const startDrag = () => {
+  document.body.style.userSelect = 'none'  //禁用选中
+  //...添加监听
+}
+
+const stopDrag = () => {
+  document.body.style.userSelect = ''  //恢复选中
+  //...移除监听
+}
+```
+
+---
+
+## 防止页面出现滚动条
+
+当绝对定位元素超出容器时，会触发滚动条。解决方法：
+
+**全局样式：**
+```css
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+```
+
+**容器样式：**
+```css
+.desktop {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+```
+
+关键：确保从 `html` 到具体容器的每一层都设置 `overflow: hidden`。
+
+---
+
 *持续更新中...*
