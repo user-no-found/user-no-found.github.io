@@ -1,5 +1,5 @@
 ---
-title: AI 学习笔记
+title: AI 主动记录的笔记
 date: 2025-12-19
 summary: Vue3 学习过程中的知识点记录
 ---
@@ -281,6 +281,191 @@ import MyComponent from '../components/MyComponent.vue'
 | `gap` | 元素间距 |
 | `align-items` | 交叉轴对齐 |
 | `justify-content` | 主轴对齐 |
+
+---
+
+## CSS 定位（position）
+
+### 定位类型
+
+| 值 | 含义 |
+|------|------|
+| `static` | 默认，正常文档流 |
+| `relative` | 相对自身原位置偏移 |
+| `absolute` | 相对最近定位祖先偏移 |
+| `fixed` | 相对视口固定，不随滚动 |
+| `sticky` | 滚动到阈值时固定 |
+
+### 固定定位居中技巧
+
+```css
+.center-fixed {
+  position: fixed;
+  left: 50%;                    /* 左边距50% */
+  transform: translateX(-50%);  /* 左移自身宽度一半 */
+}
+```
+
+原理：`left: 50%` 让元素左边缘在中间，`translateX(-50%)` 再左移自身宽度的一半，实现真正居中。
+
+---
+
+## CSS 特效
+
+### 半透明背景
+
+```css
+background: rgba(255, 255, 255, 0.2);
+```
+
+`rgba` 的第四个参数是透明度，0 完全透明，1 完全不透明。
+
+### 毛玻璃效果
+
+```css
+backdrop-filter: blur(10px);
+```
+
+让元素背后的内容模糊，配合半透明背景使用。
+
+### 圆角
+
+```css
+border-radius: 16px;
+```
+
+值越大越圆，`50%` 变成圆形。
+
+---
+
+## JavaScript 箭头函数
+
+### 语法对比
+
+```typescript
+//传统写法
+function add(a, b) {
+  return a + b
+}
+
+//箭头函数写法
+const add = (a, b) => {
+  return a + b
+}
+
+//单行可省略 return
+const add = (a, b) => a + b
+```
+
+### 结构解析
+
+```typescript
+const 函数名 = (参数: 类型) => {
+  //函数体
+}
+```
+
+---
+
+## Vue 动态样式绑定
+
+### :style 绑定对象
+
+```vue
+<div :style="{ left: x + 'px', top: y + 'px' }">
+```
+
+等价于：
+```html
+<div style="left: 100px; top: 200px;">
+```
+
+`:style` 是 `v-bind:style` 的简写，值是 JavaScript 对象。
+
+---
+
+## 鼠标事件与拖拽
+
+### 三个核心事件
+
+| 事件 | 时机 |
+|------|------|
+| `mousedown` | 按下鼠标 |
+| `mousemove` | 移动鼠标 |
+| `mouseup` | 松开鼠标 |
+
+### 拖拽实现思路
+
+1. `mousedown`：记录起始位置，添加监听
+2. `mousemove`：计算偏移，更新位置
+3. `mouseup`：移除监听
+
+```typescript
+const startDrag = (e: MouseEvent) => {
+  document.addEventListener('mousemove', onDrag)
+  document.addEventListener('mouseup', stopDrag)
+}
+
+const stopDrag = () => {
+  document.removeEventListener('mousemove', onDrag)
+  document.removeEventListener('mouseup', stopDrag)
+}
+```
+
+---
+
+## Vue 条件渲染
+
+### v-if
+
+```vue
+<div v-if="isVisible">只在条件为真时渲染</div>
+```
+
+`v-if` 为 false 时，元素完全不存在于 DOM 中。
+
+### v-html
+
+```vue
+<div v-html="htmlString"></div>
+```
+
+渲染 HTML 字符串。普通 `{{ }}` 会转义 HTML 标签。
+
+---
+
+## slot 插槽
+
+允许父组件向子组件传递内容：
+
+**子组件：**
+```vue
+<div class="window">
+  <slot></slot>  <!-- 占位符 -->
+</div>
+```
+
+**父组件使用：**
+```vue
+<AppWindow>
+  <p>这里的内容会替换 slot</p>
+</AppWindow>
+```
+
+---
+
+## z-index 层级
+
+控制元素的堆叠顺序：
+
+```css
+.window {
+  position: absolute;
+  z-index: 100;  /* 值越大越靠上 */
+}
+```
+
+注意：`z-index` 只对定位元素（position 不为 static）生效。
 
 ---
 
